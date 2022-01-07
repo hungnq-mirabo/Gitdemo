@@ -14,12 +14,16 @@
   </head>
   <body>
     <header>
-      <h1>Vue Course Goals</h1>
+      <h1>Practice vue!</h1>
     </header>
     <section id="user-goal">
-      <h2>My Course Goal is</h2>
-      <p>{{ outputGoal() }}</p>
-      <p>Learn more <a v-bind:href="vueLink">about Vue.</a></p>
+      <h2>My name is {{ myName }}</h2>
+      <p>My age is {{ myAge }}</p>
+      <p>My age in 5 years is {{ myAgeAfter5Year() }}</p>
+      <p>My favorite number is {{ Math.round(Math.random()) }}</p>
+      <div>
+        <img v-bind:src="imgLink"/>
+      </div>
     </section>
   </body>
 </html>

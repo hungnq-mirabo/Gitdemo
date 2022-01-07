@@ -1,20 +1,15 @@
 const app = Vue.createApp({
     data() {
         return {
-            courseGoalA: 'Learn vue',
-            courseGoalB: 'Master vue',
-            vueLink: 'https://vuejs.org/'
+            myName: 'Nguyen Quoc Hung',
+            myAge: 32,
+            imgLink: 'https://www.udemy.com/staticx/udemy/images/v7/logo-udemy-inverted.svg'
         };
     },
 
     methods: {
-        outputGoal() {
-            const randomNumber = Math.random()
-            if (randomNumber > 0.5) {
-                return this.courseGoalA
-            } else {
-                return this.courseGoalB
-            }
+        myAgeAfter5Year() {
+            return this.myAge + 5;
         }
     }
 });
