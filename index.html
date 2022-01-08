@@ -14,16 +14,24 @@
   </head>
   <body>
     <header>
-      <h1>Practice vue!</h1>
+      <h1>Events</h1>
     </header>
-    <section id="user-goal">
-      <h2>My name is {{ myName }}</h2>
-      <p>My age is {{ myAge }}</p>
-      <p>My age in 5 years is {{ myAgeAfter5Year() }}</p>
-      <p>My favorite number is {{ Math.round(Math.random()) }}</p>
-      <div>
-        <img v-bind:src="imgLink"/>
-      </div>
+    <section id="events">
+      <h2>Event practice</h2>
+      <button v-on:click="showAlert">Show alert</button>
+      <hr/>
+      <input type="text" v-on:input="setName">
+      <P>Your name: {{ name }}</P>
+      <input type="text" v-on:keyup.enter="confirmInput">
+      <P>Your name: {{ confirmName }}</P>
+      <button v-on:click="add(num)">Add {{ num }}</button>
+      <button v-on:click="reduce(num)">Remove {{ num }}</button>
+      <p v-once>Starting counter: {{ counter }}</p>
+      <p>Result: {{ counter }}</p>
+      <form v-on:submit.prevent="submitForm">
+        <input type="text">
+        <button>Sign up</button>
+      </form>
     </section>
   </body>
 </html>
