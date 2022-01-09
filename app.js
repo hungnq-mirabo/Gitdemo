@@ -1,28 +1,59 @@
 const app = Vue.createApp({
   data() {
     return {
-      counter: 10,
-      num: 10,
+      counter: 0,
       name: '',
-      confirmName: '',
-      alertMsg: 'This is an alert message!'
+      lastName: ''
+/*       fullName: '' */
     };
   },
+
+  watch: {
+/*     name(value) {
+      if (value === '') {
+        this.fullName = ''
+      } else {
+        this.fullName = value + ' ' + this.lastName
+      }
+    },
+
+    lastName(value) {
+      if (value === '') {
+        this.fullName = ''
+      } else {
+        this.fullName = this.name + ' ' + value
+      }
+    } */
+    counter(value) {
+      if (value > 37) {
+        alert('Too much');
+        const that = this;
+        setTimeout(function() {
+          that.counter = 0;
+        }, 1000)
+      }
+    }
+
+  },
+  computed: {
+    fullName() {
+      if (this.name === '' && this.lastName === '') {
+        return ''
+      }
+      return this.name + ' ' + this.lastName
+    }
+  }, 
   methods: {
-    confirmInput(event) {
-      this.confirmName = event.target.value;
+    resetInput() {
+      this.name = '';
+      this.lastName = '';
     },
-    showAlert() {
-      alert(this.alertMsg);
+    addFive() {
+      this.counter = this.counter + 5;
     },
-    setName(event) {
-      this.name = event.target.value;
-    },
-    add(num) {
-      this.counter = this.counter + num;
-    },
-    reduce(num) {
-      this.counter = this.counter - num;
+    addOne() {
+      this.counter = this.counter + 1;
+      // this.counter--;
     }
   }
 });

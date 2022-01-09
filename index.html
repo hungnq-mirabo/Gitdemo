@@ -14,24 +14,17 @@
   </head>
   <body>
     <header>
-      <h1>Events</h1>
+      <h1>Vue Events</h1>
     </header>
     <section id="events">
-      <h2>Event practice</h2>
-      <button v-on:click="showAlert">Show alert</button>
-      <hr/>
-      <input type="text" v-on:input="setName">
-      <P>Your name: {{ name }}</P>
-      <input type="text" v-on:keyup.enter="confirmInput">
-      <P>Your name: {{ confirmName }}</P>
-      <button v-on:click="add(num)">Add {{ num }}</button>
-      <button v-on:click="reduce(num)">Remove {{ num }}</button>
-      <p v-once>Starting counter: {{ counter }}</p>
+      <h2>Events in Action</h2>
+      <button @click="addFive">Add 5</button>
+      <button @click="addOne">Add 1</button>
       <p>Result: {{ counter }}</p>
-      <form v-on:submit.prevent="submitForm">
-        <input type="text">
-        <button>Sign up</button>
-      </form>
+      <input type="text" v-model="name">
+      <input type="text" v-model="lastName">
+      <button v-on:click="resetInput">Reset input</button>
+      <p>Your Name: {{ fullName }}</p>
     </section>
   </body>
 </html>
