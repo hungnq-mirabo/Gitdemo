@@ -14,21 +14,53 @@
   </head>
   <body>
     <header>
-      <h1>Vue Lists and Conditional Content</h1>
+      <h1>Monster Slayer</h1>
     </header>
-    <section id="user-tasks">
-      <h2>Assignment</h2>
-      <input type="text" v-model="enteredTask" v-on:keyup.enter="addTask"/>
-      <button v-on:click="addTask">Add task</button>
-      <button v-show="tasks.length > 0" v-on:click="resetTasks">Reset tasks</button>
-      <p v-show="tasks.length === 0">No tasks have been added yet - please start adding some!</p>
-      <ul>
-        <li v-if="listIsVisible" v-for="(task, index) in tasks" :key="task" v-on:click="removeTask(index)">
-          <p>{{ index + 1 }}. {{ task}}</p>
-          <input type="text" @click.stop/>
-        </li>
-      </ul>
-      <button @click="toggleTasklist">{{ buttonLabel }}</button>
-    </section>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterHealthBar"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerHealthBar"></div>
+        </div>
+      </section>
+      <section class="container" v-show="winner">
+        <h2>Game over!</h2>
+        <h3 v-if="winner === 'monster'">You lost!</h3>
+        <h3 v-if="winner === 'player'">You won!</h3>
+        <h3 v-if="winner === 'draw'">It is a draw!</h3>
+        <button @click="newGame">New game</button>
+      </section>
+      <section id="controls" v-show="!winner">
+        <button @click="playerAttack">ATTACK</button>
+        <button :disabled="isCanSpecialAttack" @click="specialAttack">SPECIAL ATTACK</button>
+        <button @click="playerHeal">HEAL</button>
+        <button @click="playerSurrender">SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="logMsg in logMessages">
+            <p v-show="logMsg.actionRound > 0">In round {{logMsg.actionRound}}</p>
+            <span :class="{'log--player': logMsg.actionBy === 'Player', 'log--monster': logMsg.actionBy === 'Monster'}">
+              {{ logMsg.actionBy === 'Player' ? 'Player' : 'Monster' }}
+            </span>
+            <span v-if="logMsg.actionType === 'heal'">
+              heals himself for
+              <span class="log--heal">{{ logMsg.actionValue }}</span>
+            </span>
+            <span v-else>
+              attacks and deals
+              <span class="log--damage">{{ logMsg.actionValue }}</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
   </body>
 </html>
