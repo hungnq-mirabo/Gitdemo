@@ -1,38 +1,80 @@
-/* const buttonEl = document.querySelector('button');
-const inputEl = document.querySelector('input');
-const listEl = document.querySelector('ul');
+const app = Vue.createApp({
+/*   createApp() {
+    console.log('createApp')
+  },
+  beforeCreate() {
+    console.log('beforeCreate')
+  },
+  created() {
+    console.log('created')
+  },
+  beforeMount() {
+    console.log('beforeMount')
+  },
+  mounted() {
+    console.log('mounted')
+  },
+  beforeUpdate() {
+    console.log('beforeUpdate')
+  },
+  updated() {
+    console.log('updated')
+  } */
+});
 
-function addGoal() {
-    const enteredValue =  inputEl.value;
-    const listItemEl = document.createElement('li');
-    if (enteredValue != '') {
-        listItemEl.textContent = enteredValue;
-        listEl.appendChild(listItemEl);
-        inputEl.value = '';
+app.component('friend-contact', {
+  template: `
+  <li>
+    <h2>{{ friend.name }}</h2>
+    <button @click="toggleDetail">{{ detailIsVisile ? 'Hide' : 'Show' }} details</button>
+    <ul v-show="detailIsVisile">
+      <li><strong>Phone:</strong>{{ friend.phone }}</li>
+      <li><strong>Email:</strong>{{ friend.email }}</li>
+    </ul>
+  </li>
+  `,
+  data() {
+    return {
+      detailIsVisile: false,
+      friend: {
+        id: 'Manuel',
+        name: 'Manuel Lorenz',
+        phone: '01234 5678 991',
+        email: 'manuel@localhost.com'
+      }
     }
+  },
+  methods: {
+    toggleDetail() {
+      this.detailIsVisile = !this.detailIsVisile;
+    }
+  }
+})
+
+app.mount('#app');
+
+/* let message = 'Hello ';
+
+let longMessage = message + 'World!';
+
+console.log(longMessage);
+
+const data = {
+  message: 'H123',
+  longMessage: 'Hello! World!'
 };
 
-buttonEl.addEventListener('click', addGoal); */
+const handler = {
+  set(target, key, value) {
+    if (key === 'message') {
+      target.longMessage = value + ' world!'
+    }
+    target.message = value;
+  }
+}
 
-const app = Vue.createApp({
-    data() {
-        return {
-            goals: [],
-            enteredValue: ''
-        };
-    },
+const proxy = new Proxy(data, handler);
 
-    methods: {
-        addGoal() {
+proxy.longMessage = 'Hello!!!!! 123'
 
-            console.log(this.enteredValue)
-
-            if (this.enteredValue != '') {
-                this.goals.push(this.enteredValue)
-                this.enteredValue = '';
-                console.log(this.enteredValue)
-            }
-
-        }
-    },
-}).mount('#app');
+console.log(proxy.longMessage) */
